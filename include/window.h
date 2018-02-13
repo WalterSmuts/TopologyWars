@@ -2,14 +2,14 @@
 #define WINDOW_H
 
 #include <QWidget>
+#include <QPainter>
+#include <QPaintEvent>
 
-class QPushButton;
 class Window : public QWidget
 {
- public:
-  explicit Window(QWidget *parent = 0);
- private:
- QPushButton *m_button;
+	public:
+	explicit Window(QWidget *parent = 0);
+	void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };
 
 #endif // WINDOW_H
