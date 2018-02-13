@@ -22,8 +22,14 @@ Dependencies
 
 Build/Run Instructions
 ------------------
-> git clone https://github.com/WalterSmuts/TopologyWars.git
-> cd TopologyWars/build
-> cmake ..
-> make
-> ./TopologyWards
+```bash
+#Download Repo
+git clone https://github.com/WalterSmuts/TopologyWars.git
+#Change to build directory
+cd TopologyWars/build
+#Create makefile and run make
+cmake ..
+make
+#Run the game
+./TopologyWars
+```
