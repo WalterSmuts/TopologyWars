@@ -6,6 +6,8 @@ Window::Window(QWidget *parent) :
 	QWidget(parent)
 {
 	//Window Constructor
+	colour = Qt::red;
+	rect = QRectF(0, 0, 10, 10);
 }
 
 void Window::paintEvent(QPaintEvent *event)
