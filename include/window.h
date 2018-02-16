@@ -20,11 +20,15 @@ class Window : public QWidget
 
 	protected:
 	void keyPressEvent(QKeyEvent *event);
+	void keyReleaseEvent(QKeyEvent *event);
+	void timerEvent(QTimerEvent *event);
 
 	private:
 	//This is temp ship vars
 	QColor colour;
 	QRectF rect;
+
+	bool left, right, up, down;
 };
 
 #endif // WINDOW_H
