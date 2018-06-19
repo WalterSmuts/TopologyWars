@@ -28,6 +28,7 @@ class Window : public QWidget
 	QColor colour;
 	QRectF rect;
 
+	int tick = 0;
 	bool left, right, up, down;
 };
 
