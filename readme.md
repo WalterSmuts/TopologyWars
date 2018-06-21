@@ -1,9 +1,7 @@
 Concept
 -------
 
-A fast paced 2D multiplayer action shooter similar to Geometry Wars. A project to brush up on C++, networking and give me an introduction to using CMake as a build tool.
-
-[Geometry Wars Retro Evolved](http://store.steampowered.com/app/8400/Geometry_Wars_Retro_Evolved/)<br>
+A fast paced 2D multiplayer action shooter similar to [Geometry Wars Retro Evolved]. A project to brush up on C++, networking and give me an introduction to using CMake as a build tool.
 
 Specifications
 --------------
@@ -35,3 +33,4 @@ make
 # Run the game
 ./TopologyWars
 ```
+[Geometry Wars Retro Evolved]:http://store.steampowered.com/app/8400/Geometry_Wars_Retro_Evolved/
