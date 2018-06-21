@@ -3,6 +3,8 @@ Concept
 
 A fast paced 2D multiplayer action shooter similar to [Geometry Wars Retro Evolved]. A project to brush up on C++, networking and give me an introduction to using CMake as a build tool.
 
+### Original:
+![Why Do I need to add text here?](https://steamcdn-a.akamaihd.net/steam/apps/8400/0000002208.1920x1080.jpg?t=1447351073)
 Specifications
 --------------
 
