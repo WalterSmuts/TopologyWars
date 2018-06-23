@@ -5,8 +5,9 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	// Declare a pointer
+	// Declare pointers
 	SDL_Window *window;
+	SDL_Renderer* gRenderer;
 
 	// Initialize SDL2
 	SDL_Init(SDL_INIT_VIDEO);
@@ -26,23 +27,30 @@ int main(int argc, char* argv[]) {
 		SDL_WINDOW_OPENGL		// flags - see below
 	);
 
-	// Check that the window was successfully created
-	if (window == NULL) {
-		// In the case that the window could not be made...
-		printf("SDL couldn't create a window:( \n Error: %s\n", SDL_GetError());
-		return 1;
-	}
+	//Create Renderer
+	gRenderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
 
 	// Set Window FullScreen
 	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 
-	// Enter main loop
-	SDL_Delay(1000); // For now just show black screen for 1 second
+	// Clears screen to black
+	SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0x00, 0xFF);
+	SDL_RenderClear(gRenderer);
 
-	// Close and destroy the window
-	SDL_DestroyWindow(window);
+	// Render red filled quad
+	SDL_Rect fillRect = {dm.w / 4, dm.h / 4, dm.w / 2, dm.h / 2 };
+	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
+	SDL_RenderFillRect( gRenderer, &fillRect );
+
+	// Update Screen
+	SDL_RenderPresent(gRenderer);
+
+	// Enter main loop
+	SDL_Delay(2000); // For now just show black screen for 2 seconds
 
 	// Clean up
+	SDL_DestroyRenderer(gRenderer);
+	SDL_DestroyWindow(window);
 	SDL_Quit();
 	return 0;
 }
