@@ -1,8 +1,10 @@
 #include "window.h"
 using namespace std;
 
-Window::Window()
+Window::Window(Block *b)
 {
+	block = b;
+
 	// Initialize SDL2
 	SDL_Init(SDL_INIT_VIDEO);
 
@@ -45,7 +47,10 @@ void Window::draw()
 	SDL_RenderClear(renderer);
 
 	// Render red filled quad
-	SDL_Rect fillRect = {width / 4, height / 4, width / 2, height / 2 };
+	SDL_Rect fillRect = {
+		width  / 2 - 50 + block->getY(),
+		height / 2 - 50 + block->getX(),
+		100, 100 };
 	SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF );
 	SDL_RenderFillRect( renderer, &fillRect );
 

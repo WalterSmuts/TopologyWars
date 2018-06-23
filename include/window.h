@@ -2,11 +2,12 @@
 #define WINDOW_H
 
 #include <SDL.h>
+#include "block.h"
 
 class Window //Childclass of SDL_Window???
 {
 	public:
-	Window();
+	Window(Block *b);
 	~Window();
 	void draw();
 
@@ -15,7 +16,7 @@ class Window //Childclass of SDL_Window???
 	SDL_Renderer* renderer;
 	int width;
 	int height;
-
+	Block *block;
 };
 
 #endif // WINDOW_H
