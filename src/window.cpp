@@ -1,68 +1,54 @@
 #include "window.h"
-#include <math.h>
-#include <iostream>
 using namespace std;
 
-Window::Window(QWidget *parent) :
-	QWidget(parent)
+Window::Window()
 {
-	//Window Constructor
-	colour = Qt::red;
-	rect = QRectF(this->width()/2, this->height()/2, 10, 10);
-	startTimer(1);
-	left = false;
-	right = false;
-	up = false;
-	down = false;
+	// Initialize SDL2
+	SDL_Init(SDL_INIT_VIDEO);
+
+	// Get screen size
+	int screenHeight, screenWidth;
+	SDL_DisplayMode dm;
+	SDL_GetDesktopDisplayMode(0, &dm);
+	width = dm.w;
+	height = dm.h;
+
+	// Create an application window with the following settings:
+	window = SDL_CreateWindow(
+		"Topology Wars",		// window title
+		SDL_WINDOWPOS_UNDEFINED,	// initial x position
+		SDL_WINDOWPOS_UNDEFINED,	// initial y position
+		width,				// width, in pixels
+		height,				// height, in pixels
+		SDL_WINDOW_OPENGL		// flags - see below
+	);
+
+	//Create Renderer
+	renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
+
+	// Set Window FullScreen
+	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 }
 
-void Window::paintEvent(QPaintEvent *event)
+Window::~Window()
 {
-	//Setup Painter
-	QPainter painter;
-	painter.begin(this);
-
-	//Paint black background
-	painter.fillRect(event->rect(), Qt::black);
-	//Paint 10x10 blue ellipse
-	painter.setBrush(Qt::blue);
-	painter.drawEllipse(rect);
-
-	//Finalize Paint event
-	QWidget::paintEvent(event);
-	painter.end();
+	// Clean up
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+	SDL_Quit();
 }
 
-void Window::keyPressEvent(QKeyEvent *event){
-	if (event->isAutoRepeat()) return;
-	cout << "KeyPress!!! " << event->key() << endl;
-	if (event->key() == LEFT) 	left = true;
-	if (event->key() == RIGHT)	right = true;
-	if (event->key() == UP) 	up = true;
-	if (event->key() == DOWN) 	down = true;
-
-	if (event->key() == EXIT) this->close();
-}
-
-void Window::keyReleaseEvent(QKeyEvent *event){
-	if (event->isAutoRepeat()) return;
-	cout << "KeyRelease!!! " << event->key() << endl;
-	if (event->key() == LEFT)	left = false;
-	if (event->key() == RIGHT)	right = false;
-	if (event->key() == UP)		up = false;
-	if (event->key() == DOWN)	down = false;
-}
-
-void Window::timerEvent(QTimerEvent *event)
+void Window::draw()
 {
-	//Animate Elipse
-	this->rect.setWidth(100 + 50*sin((float)tick/(float)80));
-	this->rect.setHeight(100);
+	// Clears screen to black
+	SDL_SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0xFF);
+	SDL_RenderClear(renderer);
 
-	this->rect.setX(round(-this->rect.width()/2 + this->width()/2.0 + 200*sin((float)tick/(float)50 + M_PI/2)));
-	this->rect.setY(round(-this->rect.height()/2 + this->height()/2.0 + 200*sin((float)tick/(float)50)));
+	// Render red filled quad
+	SDL_Rect fillRect = {width / 4, height / 4, width / 2, height / 2 };
+	SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF );
+	SDL_RenderFillRect( renderer, &fillRect );
 
-	//Repaint
-	QWidget::update();
-	tick++;
+	// Update Screen
+	SDL_RenderPresent(renderer);
 }
