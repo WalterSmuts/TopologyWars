@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 
 		// Draw
 		window.draw();
-		SDL_Delay(20); // Approximately 50 Hz
+		SDL_Delay(10); // Approximately 50 Hz
 	}
 	return 0;
 }

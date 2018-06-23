@@ -26,7 +26,8 @@ Window::Window(Block *b)
 	);
 
 	//Create Renderer
-	renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
+	renderer = SDL_CreateRenderer( window, -1,
+		 SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 
 	// Set Window FullScreen
 	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);

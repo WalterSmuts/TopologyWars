@@ -29,6 +29,6 @@ int Block::getHeight(){
 }
 
 void Block::update(int ticks){
-	x = 200*sin(ticks*0.005);
-	y = 200*cos(ticks*0.005);
+	x = 200*sin(ticks*0.01);
+	y = 200*cos(ticks*0.01);
 }
