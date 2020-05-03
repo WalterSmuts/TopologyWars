@@ -59,6 +59,14 @@ void Window::draw()
     SDL_RenderPresent(renderer);
 }
 
+void Window::update(int ticks)
+{
+    list<Block>::iterator block;
+    for (block = blockList->begin(); block != blockList->end(); ++block) {
+        block->update(ticks);
+    }
+}
+
 int Window::getWidth() {
     return width;
 }

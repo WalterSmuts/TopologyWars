@@ -9,14 +9,10 @@ using namespace std;
 
 static int updateThread(void *ptr)
 {
-    list<Block> *blockList = (list<Block>*)ptr;
-    list<Block>::iterator block;
+    Window *w = (Window*)ptr;
     while (true)
     {
-        Uint32 ticks = SDL_GetTicks();
-        for (block = blockList->begin(); block != blockList->end(); ++block) {
-           block->update(ticks);
-        }
+        w->update(SDL_GetTicks());
     }
     return 0;
 }
@@ -46,7 +42,7 @@ int main(int argc, char* argv[]) {
 
     // Start Update thread
     SDL_Thread *thread1;
-    thread1 = SDL_CreateThread(updateThread, "updateThread", &blockList);
+    thread1 = SDL_CreateThread(updateThread, "updateThread", &window);
 
     // Start Rendering thread
     SDL_Thread *thread2;

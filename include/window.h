@@ -13,6 +13,7 @@ class Window //Childclass of SDL_Window???
 
     ~Window();
     void draw();
+    void update(int ticks);
     int getHeight();
     int getWidth();
 
