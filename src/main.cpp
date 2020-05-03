@@ -1,6 +1,6 @@
 #include "SDL.h"
 #include "window.h"
-#include "block.h"
+#include "ball.h"
 #include <cstdio>
 #include <list>
 #include <cstdlib>
@@ -43,16 +43,15 @@ static int handle_event(void *ptr)
 
 int main(int argc, char* argv[]) {
     // Declare pointers
-    list<Block> blockList;
+    list<Ball> ballList;
     for (int i = 0; i < 200; i++) {
-        blockList.emplace_back(Block(rand()%1000 - 500,
+        ballList.emplace_back(Ball(rand() % 1000 - 500,
                                      rand()%1000 - 500,
                                      rand()%100 - 50,
-                                     rand()%100 - 50,
                                      rand()%1000,
-                                     (rand()%200 - 100)/10000.0f));
+                                     (rand()%200 - 100)/100000.0f));
     }
-    Window window(&blockList);
+    Window window(&ballList);
 
     // Start Update thread
     SDL_Thread *thread1;

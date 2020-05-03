@@ -2,14 +2,14 @@
 #define WINDOW_H
 
 #include <SDL.h>
-#include "block.h"
+#include "ball.h"
 #include <list>
 
-class Block;
+class Ball;
 class Window //Childclass of SDL_Window???
 {
     public:
-    Window(std::list<Block> *blockList);
+    Window(std::list<Ball> *ballList);
 
     ~Window();
     void draw();
@@ -24,7 +24,7 @@ class Window //Childclass of SDL_Window???
     SDL_Renderer* renderer;
     int width;
     int height;
-    std::list<Block> *blockList;
+    std::list<Ball> *ballList;
     bool running;
 };
 

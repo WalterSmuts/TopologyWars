@@ -3,9 +3,9 @@
 
 using namespace std;
 
-Window::Window(list<Block> *blockList)
+Window::Window(list<Ball> *ballList)
 {
-    this->blockList = blockList;
+    this->ballList = ballList;
 
     // Initialize SDL2
     SDL_Init(SDL_INIT_VIDEO);
@@ -50,10 +50,10 @@ void Window::draw()
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(renderer);
 
-    // Let blocks draw themselves
-    list<Block>::iterator block;
-    for (block = blockList->begin(); block != blockList->end(); ++block) {
-        block->draw(this, renderer);
+    // Let balls draw themselves
+    list<Ball>::iterator ball;
+    for (ball = ballList->begin(); ball != ballList->end(); ++ball) {
+        ball->draw(this, renderer);
     }
 
     // Update Screen
@@ -62,9 +62,9 @@ void Window::draw()
 
 void Window::update(int ticks)
 {
-    list<Block>::iterator block;
-    for (block = blockList->begin(); block != blockList->end(); ++block) {
-        block->update(ticks);
+    list<Ball>::iterator ball;
+    for (ball = ballList->begin(); ball != ballList->end(); ++ball) {
+        ball->update(ticks);
     }
 }
 

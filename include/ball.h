@@ -1,15 +1,15 @@
-#ifndef BLOCK_H
-#define BLOCK_H
+#ifndef BALL_H
+#define BALL_H
 
 #include <SDL.h>
 #include "window.h"
 #include <list>
 
 class Window;
-class Block
+class Ball
 {
     public:
-    Block(int x, int y, int width, int height, int radius, float speed);
+    Ball(int x, int y, int radius, int orbital_radius, float speed);
     void update(int ticks);
     void draw(Window* window, SDL_Renderer* renderer);
 
@@ -18,10 +18,11 @@ class Block
     int y;
     int x_center;
     int y_center;
-    int width;
-    int height;
     int radius;
+    int orbital_radius;
     float speed;
+
+    void drawCircle(SDL_Renderer *renderer, int32_t centreX, int32_t centreY, int32_t radius);
 };
 
-#endif // BLOCK_H
+#endif // BALL_H
