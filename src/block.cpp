@@ -1,12 +1,13 @@
 #include "block.h"
+#include "window.h"
 #include <math.h>
 
 Block::Block()
 {
     x = 0;
     y = 0;
-    width = 0;
-    height = 0;
+    width = 50;
+    height = 50;
 }
 
 int Block::getX()
@@ -19,13 +20,14 @@ int Block::getY()
     return y;
 }
 
-int Block::getWidth()
+void Block::draw(Window *window, SDL_Renderer *renderer)
 {
-    return width;
-}
-
-int Block::getHeight(){
-    return height;
+    SDL_Rect fillRect = {
+        window->getWidth()/2 - 50 + this->getY(),
+        window->getHeight()/2 - 50 + this->getX(),
+        width, height};
+    SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
+    SDL_RenderFillRect(renderer, &fillRect);
 }
 
 void Block::update(int ticks){

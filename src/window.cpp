@@ -47,14 +47,17 @@ void Window::draw()
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(renderer);
 
-    // Render red filled quad
-    SDL_Rect fillRect = {
-        width/2 - 50 + block->getY(),
-        height/2 - 50 + block->getX(),
-        100, 100};
-    SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF);
-    SDL_RenderFillRect(renderer, &fillRect);
+    // Let objects draw themselves
+    block->draw(this, renderer);
 
     // Update Screen
     SDL_RenderPresent(renderer);
+}
+
+int Window::getWidth() {
+    return width;
+}
+
+int Window::getHeight() {
+    return height;
 }
