@@ -3,13 +3,15 @@
 
 #include <SDL.h>
 #include "block.h"
+#include <list>
 
 class Block;
 class Window //Childclass of SDL_Window???
 {
 	public:
-	Window(Block *b);
-	~Window();
+	Window(std::list<Block> *blockList);
+
+    ~Window();
 	void draw();
     int getHeight();
     int getWidth();
@@ -19,7 +21,7 @@ class Window //Childclass of SDL_Window???
 	SDL_Renderer* renderer;
 	int width;
 	int height;
-	Block *block;
+    std::list<Block> *blockList;
 };
 
 #endif // WINDOW_H

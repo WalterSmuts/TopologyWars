@@ -1,9 +1,11 @@
 #include "window.h"
+#include <list>
+
 using namespace std;
 
-Window::Window(Block *b)
+Window::Window(list<Block> *blockList)
 {
-    block = b;
+    this->blockList = blockList;
 
     // Initialize SDL2
     SDL_Init(SDL_INIT_VIDEO);
@@ -47,8 +49,11 @@ void Window::draw()
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(renderer);
 
-    // Let objects draw themselves
-    block->draw(this, renderer);
+    // Let blocks draw themselves
+    list<Block>::iterator block;
+    for (block = blockList->begin(); block != blockList->end(); ++block) {
+        block->draw(this, renderer);
+    }
 
     // Update Screen
     SDL_RenderPresent(renderer);

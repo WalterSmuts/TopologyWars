@@ -2,15 +2,21 @@
 #include "window.h"
 #include "block.h"
 #include <cstdio>
+#include <list>
+#include <cstdlib>
 
 using namespace std;
 
 static int updateThread(void *ptr)
 {
-    Block *b = (Block*)ptr;
+    list<Block> *blockList = (list<Block>*)ptr;
+    list<Block>::iterator block;
     while (true)
     {
-        b->update(SDL_GetTicks());
+        Uint32 ticks = SDL_GetTicks();
+        for (block = blockList->begin(); block != blockList->end(); ++block) {
+           block->update(ticks);
+        }
     }
     return 0;
 }
@@ -27,12 +33,20 @@ static int renderThread(void *ptr)
 
 int main(int argc, char* argv[]) {
     // Declare pointers
-    Block block;
-    Window window(&block);
+    list<Block> blockList;
+    for (int i = 0; i < 200; i++) {
+        blockList.emplace_back(Block(rand()%1000 - 500,
+                                     rand()%1000 - 500,
+                                     rand()%100 - 50,
+                                     rand()%100 - 50,
+                                     rand()%1000,
+                                     (rand()%200 - 100)/10000.0f));
+    }
+    Window window(&blockList);
 
     // Start Update thread
     SDL_Thread *thread1;
-    thread1 = SDL_CreateThread(updateThread, "updateThread", &block);
+    thread1 = SDL_CreateThread(updateThread, "updateThread", &blockList);
 
     // Start Rendering thread
     SDL_Thread *thread2;
