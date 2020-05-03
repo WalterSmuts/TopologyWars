@@ -1,9 +1,7 @@
 #include "SDL.h"
 #include "window.h"
 #include "block.h"
-#include <stdio.h>
-#include <iostream>
-#include <math.h>
+#include <cstdio>
 
 using namespace std;
 

@@ -1,6 +1,6 @@
 #include "block.h"
 #include "window.h"
-#include <math.h>
+#include <cmath>
 
 Block::Block()
 {
