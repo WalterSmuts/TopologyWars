@@ -10,7 +10,7 @@ using namespace std;
 static int updateThread(void *ptr)
 {
     Window *w = (Window*)ptr;
-    while (true)
+    while (w->isRunning())
     {
         w->update(SDL_GetTicks());
     }
@@ -20,9 +20,23 @@ static int updateThread(void *ptr)
 static int renderThread(void *ptr)
 {
     Window *w = (Window*)ptr;
-    while (true)
+    while (w->isRunning())
     {
         w->draw();
+    }
+    return 0;
+}
+
+static int handle_event(void *ptr)
+{
+    Window *w = (Window*)ptr;
+    while (w->isRunning())
+    {
+        SDL_Event e;
+        SDL_PollEvent(&e);
+        if (e.type == SDL_QUIT || e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) {
+            w->stop();
+        }
     }
     return 0;
 }
@@ -48,7 +62,12 @@ int main(int argc, char* argv[]) {
     SDL_Thread *thread2;
     thread2 = SDL_CreateThread(renderThread, "renderThread", &window);
 
+    // Start event handling thread
+    SDL_Thread *thread3;
+    thread3 = SDL_CreateThread(handle_event, "eventHandlingThread", &window);
+
     SDL_WaitThread(thread1, NULL);
     SDL_WaitThread(thread2, NULL);
+    SDL_WaitThread(thread3, NULL);
     return 0;
 }

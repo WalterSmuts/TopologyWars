@@ -33,6 +33,7 @@ Window::Window(list<Block> *blockList)
 
     // Set Window FullScreen
     SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+    this->running = true;
 }
 
 Window::~Window()
@@ -73,4 +74,14 @@ int Window::getWidth() {
 
 int Window::getHeight() {
     return height;
+}
+
+bool Window::isRunning()
+{
+    return running;
+}
+
+void Window::stop()
+{
+    this->running = false;
 }

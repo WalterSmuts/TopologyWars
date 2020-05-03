@@ -16,6 +16,8 @@ class Window //Childclass of SDL_Window???
     void update(int ticks);
     int getHeight();
     int getWidth();
+    bool isRunning();
+    void stop();
 
     private:
     SDL_Window* window;
@@ -23,6 +25,7 @@ class Window //Childclass of SDL_Window???
     int width;
     int height;
     std::list<Block> *blockList;
+    bool running;
 };
 
 #endif // WINDOW_H
