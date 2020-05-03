@@ -8,19 +8,19 @@
 class Block;
 class Window //Childclass of SDL_Window???
 {
-	public:
-	Window(std::list<Block> *blockList);
+    public:
+    Window(std::list<Block> *blockList);
 
     ~Window();
-	void draw();
+    void draw();
     int getHeight();
     int getWidth();
 
-	private:
-	SDL_Window* window;
-	SDL_Renderer* renderer;
-	int width;
-	int height;
+    private:
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+    int width;
+    int height;
     std::list<Block> *blockList;
 };
 
